@@ -1,19 +1,12 @@
 package com.gsalah.smser;
 
 import android.content.BroadcastReceiver;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.speech.tts.TextToSpeech;
 import android.telephony.SmsMessage;
 import android.widget.Toast;
-
-import java.util.Locale;
 
 public class SmsReceiver extends BroadcastReceiver {
 
@@ -24,6 +17,7 @@ public class SmsReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        Toast.makeText(context, "We are in Receiver", Toast.LENGTH_SHORT).show();
         mContext = context;
         if (intent.getAction().equals(SMS_RECEIVED)) {
             Bundle bundle = intent.getExtras();
@@ -44,7 +38,6 @@ public class SmsReceiver extends BroadcastReceiver {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
                 PackageManager pm = context.getPackageManager();
                 Intent launchIntent = pm.getLaunchIntentForPackage("com.gsalah.smser");
-//                Intent launchIntent = new Intent(context, MyService.class);
                 launchIntent.putExtra("message", message);
                 launchIntent.putExtra("sender", sender);
                 context.startActivity(launchIntent);
