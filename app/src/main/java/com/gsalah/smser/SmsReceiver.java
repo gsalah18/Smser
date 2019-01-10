@@ -17,7 +17,6 @@ public class SmsReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Toast.makeText(context, "We are in Receiver", Toast.LENGTH_SHORT).show();
         mContext = context;
         if (intent.getAction().equals(SMS_RECEIVED)) {
             Bundle bundle = intent.getExtras();

@@ -26,7 +26,6 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
     static final int PERMISSION_REQUEST = 123;
     private Context context = this;
-
     TextToSpeech textToSpeech = null;
     String sender = "";
     String message = "";
@@ -40,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         textView = findViewById(R.id.textView);
         requestPermission();
+
         if (getIntent().getExtras() != null && getIntent().getExtras().getString("sender") != null) {
             sender = getIntent().getExtras().getString("sender");
             sender = getContact(sender);
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
                 textToSpeech = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
                     @Override
                     public void onInit(int status) {
-                        textToSpeech.setLanguage(Locale.UK);
+                        textToSpeech.setLanguage(Locale.US);
                         readClicked(null);
                     }
                 });
@@ -74,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
                         PackageManager.PERMISSION_GRANTED &&
                         ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_CONTACTS) !=
                                 PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(context, "4", Toast.LENGTH_LONG).show();
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECEIVE_SMS,
                     Manifest.permission.READ_SMS, Manifest.permission.READ_CONTACTS}, PERMISSION_REQUEST);
         }
